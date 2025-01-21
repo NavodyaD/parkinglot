@@ -29,9 +29,9 @@ class AdminWebDashboard extends StatelessWidget {
               // Handle navigation
             },
           ),
-          Expanded(
-            child: AdminDashboardContent(),
-          ),
+          //Expanded(
+            //child: AdminDashboardContent(),
+          //),
         ],
       ),
     );

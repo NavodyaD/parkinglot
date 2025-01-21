@@ -1,18 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:parkinglot/screens/owner/dashboard.dart';
+import 'package:parkinglot/screens/user/dashboard.dart';
+import 'package:parkinglot/screens/user/parking_details_page.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MaterialApp(
+      home: ParkingDetailsPage(),
+    );
+    /*return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ParkingLotProvider()),
@@ -27,10 +33,10 @@ class MyApp extends StatelessWidget {
         routes: {
           '/user-dashboard': (context) => UserDashboard(),
           '/owner-dashboard': (context) => OwnerDashboard(),
-          '/profile': (context) => UserProfile(),
+          //'/profile': (context) => UserProfile(),
           '/parking-history': (context) => ParkingHistory(),
         },
       ),
-    );
+    );*/
   }
 }

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../models/parking_lot.dart';
 import '../../services/parking_service.dart';
 
-class OwnerDashboard extends StatelessWidget {
+/*class OwnerDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,4 +41,4 @@ class OwnerDashboard extends StatelessWidget {
       ),
     );
   }
-}
+}*/

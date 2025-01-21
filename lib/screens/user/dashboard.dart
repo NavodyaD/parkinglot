@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/parking_lot.dart';
 import '../../services/parking_service.dart';
 
 class UserDashboard extends StatefulWidget {
@@ -18,7 +21,7 @@ class _UserDashboardState extends State<UserDashboard> {
   void initState() {
     super.initState();
     _getCurrentLocation();
-    _setupLocationStream();
+    //_setupLocationStream();
   }
 
   Future<void> _getCurrentLocation() async {
@@ -30,7 +33,7 @@ class _UserDashboardState extends State<UserDashboard> {
     });
   }
 
-  void _setupLocationStream() {
+  /*void _setupLocationStream() {
     final parkingService = Provider.of<ParkingService>(context, listen: false);
     parkingService.getNearbyParkingLots(
         currentLocation.latitude,
@@ -40,7 +43,7 @@ class _UserDashboardState extends State<UserDashboard> {
         nearbyParkingLots = lots;
       });
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,7 @@ class _UserDashboardState extends State<UserDashboard> {
               icon: BitmapDescriptor.defaultMarkerWithHue(
                   lot.isOccupied ? BitmapDescriptor.hueRed : BitmapDescriptor.hueGreen
               ),
-              onTap: () => _showParkingLotDetails(lot),
+              //onTap: () => _showParkingLotDetails(lot),
             )).toSet(),
             onMapCreated: (GoogleMapController controller) {
               mapController = controller;
@@ -85,7 +88,7 @@ class _UserDashboardState extends State<UserDashboard> {
     );
   }
 
-  void _showParkingLotDetails(ParkingLot lot) {
+  /*void _showParkingLotDetails(ParkingLot lot) {
     showModalBottomSheet(
       context: context,
       builder: (context) => ParkingLotDetailsSheet(
@@ -117,5 +120,5 @@ class _UserDashboardState extends State<UserDashboard> {
         );
       }
     }
-  }
+  }*/
 }
