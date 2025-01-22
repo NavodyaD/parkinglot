@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkinglot/screens/user/slot_booking_page.dart';
 
 class ParkingDetailsPage extends StatefulWidget {
   @override
@@ -46,7 +47,14 @@ class _ParkingDetailsPageState extends State<ParkingDetailsPage> {
               // G12 parking slot
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/booking', arguments: slotId2);
+                  // Pass the slotId when navigating to BookingPage
+                  String slotId = 'G11'; // Replace with your dynamic slot ID
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookingPage(slotId: slotId),
+                    ),
+                  );
                 },
                 child: Container(
                   width: 200,

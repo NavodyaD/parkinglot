@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BookingPage extends StatelessWidget {
+
+  final String slotId;
+
+  // Accept slotId in the constructor
+  BookingPage({required this.slotId});
+
   @override
   Widget build(BuildContext context) {
     // Get the slot ID from the previous page
-    final String slotId = ModalRoute.of(context)!.settings.arguments as String;
+    //final String slotId = ModalRoute.of(context)!.settings.arguments as String;
 
     // Controllers for the text fields
     final TextEditingController vehicleNumberController = TextEditingController();
