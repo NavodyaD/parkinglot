@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class BookingPage extends StatelessWidget {
 
   final String slotId;
-
-  // Accept slotId in the constructor
+  // get the slot id from previous page
   BookingPage({required this.slotId});
 
   @override
   Widget build(BuildContext context) {
-    // Get the slot ID from the previous page
-    //final String slotId = ModalRoute.of(context)!.settings.arguments as String;
 
-    // Controllers for the text fields
+    // controllers for the text fields
     final TextEditingController vehicleNumberController = TextEditingController();
-    final TextEditingController additionalInfoController = TextEditingController();
+    final TextEditingController paymentKeyController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: Text('Booking Page')),
@@ -24,12 +23,12 @@ class BookingPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Display the selected slot ID
+              // display the selected slot ID
               Text(
                 'Booking for Slot: $slotId',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              //SizedBox(height: 20),
 
               // Vehicle number input
               TextField(
@@ -40,23 +39,23 @@ class BookingPage extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.text,
               ),
-              SizedBox(height: 20),
 
-              // Image and additional information section
+              //SizedBox(height: 20),
+
+              // payment key input
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Example image (you can replace this with your actual image)
-                  Icon(Icons.directions_car, size: 50, color: Colors.blue),
+                  Icon(Icons.payment_rounded, size: 50, color: Colors.blue),
                   SizedBox(width: 10),
                   Column(
                     children: [
-                      Text('Vehicle Type', style: TextStyle(fontSize: 18)),
+                      Text('Payment Key', style: TextStyle(fontSize: 18)),
                       SizedBox(height: 10),
                       TextField(
-                        controller: additionalInfoController,
+                        controller: paymentKeyController,
                         decoration: InputDecoration(
-                          labelText: 'Enter Additional Info (optional)',
+                          labelText: 'Enter your payment key',
                           border: OutlineInputBorder(),
                         ),
                         keyboardType: TextInputType.text,
@@ -65,35 +64,70 @@ class BookingPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              //SizedBox(height: 30),
 
-              // "Make Booking" Button
+              // 'Make Booking' Button
               ElevatedButton(
-                onPressed: () {
-                  // Logic for making a booking
+                onPressed: () async {
+                  // Get the details and get the current date and time
                   String vehicleNumber = vehicleNumberController.text;
-                  String additionalInfo = additionalInfoController.text;
+                  String paymentKey = paymentKeyController.text;
+                  String bookingId = DateTime.now().millisecondsSinceEpoch.toString();
+                  String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+                  String formattedTime = DateFormat('HH:mm:ss').format(DateTime.now());
 
-                  // Handle booking logic here (e.g., show a confirmation dialog)
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Booking Confirmed'),
-                        content: Text(
-                          'Vehicle Number: $vehicleNumber\nAdditional Info: $additionalInfo\nSlot ID: $slotId',
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('OK'),
+                  // store the booking details in Firebase Firestore
+                  try {
+                    await FirebaseFirestore.instance.collection('BookingDetails').add({
+                      'bookingId': bookingId,
+                      'vehicleNumber': vehicleNumber,
+                      'date': formattedDate,
+                      'time': formattedTime,
+                      'parkingSlotId': slotId,
+                      'paymentKey': paymentKey,
+                    });
+
+                    // Show confirmation msg
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Booking Confirmed'),
+                          content: Text(
+                            'Booking ID: $bookingId\nVehicle Number: $vehicleNumber\nDate: $formattedDate\nTime: $formattedTime\nSlot ID: $slotId\nAdditional Info: $paymentKey',
                           ),
-                        ],
-                      );
-                    },
-                  );
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } catch (e) {
+                    // Handle any errors
+                    print('Error saving your slot booking: $e');
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Error'),
+                          content: Text('There was an error saving your booking. Please try again.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
                 child: Text('Make Booking'),
                 style: ElevatedButton.styleFrom(
@@ -108,3 +142,5 @@ class BookingPage extends StatelessWidget {
     );
   }
 }
+
+
