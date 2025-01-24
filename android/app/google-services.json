@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "958991568380",
+    "project_id": "parkinglot-3857b",
+    "storage_bucket": "parkinglot-3857b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958991568380:android:1058a13591100937d23679",
+        "android_client_info": {
+          "package_name": "com.example.parkinglot.parkinglot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958991568380-fiqs61ecqkqjrkbremqu0vfgeubuv0ta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEQbaAMG4Jd-ZAmZj-M02Gul1cDgeDb6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958991568380-fiqs61ecqkqjrkbremqu0vfgeubuv0ta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
