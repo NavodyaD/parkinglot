@@ -2,10 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-class BookingPage extends StatelessWidget {
-  final String slotId;
+import '../../services/slotstate_services.dart';
+
+class BookingPage extends StatefulWidget {
+  final int slotId;
 
   BookingPage({required this.slotId});
+  final SlotService slotService = SlotService();
+
+  @override
+  State<BookingPage> createState() => _BookingPageState();
+}
+
+class _BookingPageState extends State<BookingPage> {
+  late SlotService slotService;
+  late int slotId;
+
+  @override
+  void initState() {
+    super.initState();
+    slotId = widget.slotId;
+    slotService = SlotService();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +40,7 @@ class BookingPage extends StatelessWidget {
           children: [
             // Display the selected slot ID
             Text(
-              'Booking for Slot: $slotId',
+              'Booking for Slot: ${widget.slotId}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -66,7 +84,7 @@ class BookingPage extends StatelessWidget {
                     'vehicleNumber': vehicleNumber,
                     'date': formattedDate,
                     'time': formattedTime,
-                    'parkingSlotId': slotId,
+                    'parkingSlotId': widget.slotId,
                     'paymentKey': paymentKey,
                   });
 
@@ -77,7 +95,7 @@ class BookingPage extends StatelessWidget {
                       return AlertDialog(
                         title: Text('Booking Confirmed'),
                         content: Text(
-                          'Booking ID: $bookingId\nVehicle Number: $vehicleNumber\nDate: $formattedDate\nTime: $formattedTime\nSlot ID: $slotId\nPayment Key: $paymentKey',
+                          'Booking ID: $bookingId\nVehicle Number: $vehicleNumber\nDate: $formattedDate\nTime: $formattedTime\nSlot ID: ${widget.slotId}\nPayment Key: $paymentKey',
                         ),
                         actions: [
                           TextButton(
@@ -111,6 +129,7 @@ class BookingPage extends StatelessWidget {
                     },
                   );
                 }
+                await slotService.updateSlotStatus(slotId, 'vehicleParked');
               },
               child: Text('Make Booking'),
               style: ElevatedButton.styleFrom(

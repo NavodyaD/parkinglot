@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ParkingSlotTile extends StatelessWidget {
+class ParkingSlotWidget extends StatelessWidget {
   final int slotNumber;
   final String slotStatus;
 
-  ParkingSlotTile({required this.slotNumber, required this.slotStatus});
+  ParkingSlotWidget({required this.slotNumber, required this.slotStatus});
 
   @override
   Widget build(BuildContext context) {
-    // define color and image visibility based on slotStatus
+    // define color and icon visibility based on slotStatus
     Color slotBgColor;
     bool showIcon;
 
@@ -33,7 +33,7 @@ class ParkingSlotTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              if (showIcon) // control the img visibility
+              if (showIcon) // control the visibility of icon
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.directions_car_filled, color: Colors.white,)
@@ -46,13 +46,17 @@ class ParkingSlotTile extends StatelessWidget {
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black54),
                   ),
                   Text(
-                    slotStatus == 'available'
-                        ? 'Available'
-                        : slotStatus == 'vehicleParked'
-                        ? 'Parked'
-                        : 'Booked',
+                    (() {
+                      if (slotStatus == 'available') {
+                        return 'Available';
+                      } else if (slotStatus == 'vehicleParked') {
+                        return 'Parked';
+                      } else {
+                        return 'Booked';
+                      }
+                    })(),
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black45),
-                  ),
+                  )
                 ],
               ),
             ],
