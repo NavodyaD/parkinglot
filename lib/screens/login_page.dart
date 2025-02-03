@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:parkinglot/screens/user/parking_details_page.dart';
 import 'signup_page.dart';
-import 'parking_details_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
