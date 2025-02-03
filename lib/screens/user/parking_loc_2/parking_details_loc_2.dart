@@ -2,48 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:parkinglot/screens/user/slot_booking_page.dart';
 import 'package:parkinglot/screens/user/slot_tile.dart';
 
-import '../../services/slotstate_services.dart';
+import '../../../services/slotstate_services.dart';
 
-class ParkingDetailsPage extends StatefulWidget {
+class ParkingDetailsLocation2 extends StatefulWidget {
   @override
-  State<ParkingDetailsPage> createState() => _ParkingDetailsPageState();
+  State<ParkingDetailsLocation2> createState() => _ParkingDetailsPageState();
 }
 
-class _ParkingDetailsPageState extends State<ParkingDetailsPage> {
+class _ParkingDetailsPageState extends State<ParkingDetailsLocation2> {
+
 
   final SlotService slotService = SlotService();
+  final String car_park_name = "Kandy Car Park";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Parking Page')),
-      body: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(top: 20, bottom: 20, left: 8, right: 8),
-            decoration: BoxDecoration(
-              color: Color(0xFFAEC5C2),
-              border: Border.all(color: Color(0xFF7FB5B0), width: 2),
-              borderRadius: BorderRadius.circular(15),
+        appBar: AppBar(title: Text(car_park_name)),
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 20, bottom: 20, left: 8, right: 8),
+              decoration: BoxDecoration(
+                color: Color(0xFFAEC5C2),
+                border: Border.all(color: Color(0xFF7FB5B0), width: 2),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 2 slots as a row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildParkingSlot(203),
+                      SizedBox(width: 8),
+                      _buildParkingSlot(204),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                ],
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 2 slots as a row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildParkingSlot(201),
-                    SizedBox(width: 8),
-                    _buildParkingSlot(202),
-                  ],
-                ),
-                SizedBox(height: 12),
-              ],
-            ),
-          ),
-        ],
-      )
+          ],
+        )
     );
   }
 

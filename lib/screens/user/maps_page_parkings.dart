@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:parkinglot/screens/user/parking_details_page.dart';
+import 'package:parkinglot/screens/user/parking_loc_2/parking_details_loc_2.dart';
 
 class ParkingMapPage extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ParkingDetailsPage(),
+        builder: (context) => ParkingDetailsLocation2(),
       ),
     );
   }
