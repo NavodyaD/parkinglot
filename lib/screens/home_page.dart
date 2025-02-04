@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:parkinglot/screens/admin/web_dashboard.dart';
 import 'package:parkinglot/screens/owner/dashboard.dart';
 import 'package:parkinglot/screens/user/dashboard.dart';
+
+import 'admin/admin_dashboard.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -43,7 +44,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AdminWebDashboard()),
+                  MaterialPageRoute(builder: (context) => AdminDashboard()),
                 );
               },
               child: Text('Parking Owner Portral'),
@@ -60,7 +61,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AdminWebDashboard()),
+                  MaterialPageRoute(builder: (context) => AdminDashboard()),
                 );
               },
               child: Text('ParkingLot Administrator'),

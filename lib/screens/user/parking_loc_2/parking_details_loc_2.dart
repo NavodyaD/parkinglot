@@ -35,9 +35,9 @@ class _ParkingDetailsPageState extends State<ParkingDetailsLocation2> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildParkingSlot(203),
+                      _buildParkingSlot(427),
                       SizedBox(width: 8),
-                      _buildParkingSlot(204),
+                      _buildParkingSlot(428),
                     ],
                   ),
                   SizedBox(height: 12),
