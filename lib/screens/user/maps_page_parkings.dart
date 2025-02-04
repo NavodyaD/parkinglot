@@ -44,14 +44,35 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
     _markers.addAll([
       Marker(
         point: _parkingLocation_1,
-        width: 80,
+        width: 140,
         height: 80,
         // gesture detector as marker child
         child: GestureDetector(
           onTap: () {
             _navigateToParkingLocationOne();
           },
-          child: Icon(Icons.directions_car, color: Colors.blue, size: 30,),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.directions_car, color: Colors.white, size: 30),
+                SizedBox(width: 8),
+                Text(
+                  'Galle Parking',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          )
+
         ),
       ),
       Marker(
@@ -63,7 +84,27 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
           onTap: () {
             _navigateToParkingLocationTwo();
           },
-          child: Icon(Icons.directions_car, color: Colors.blue, size: 30,),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.directions_car, color: Colors.white, size: 30),
+                SizedBox(width: 8),
+                Text(
+                  'Galle Parking',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     ]);

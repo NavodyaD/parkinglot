@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:parkinglot/screens/owner/dashboard.dart';
 import 'package:parkinglot/screens/user/dashboard.dart';
 
 import 'admin/admin_dashboard.dart';
