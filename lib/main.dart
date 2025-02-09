@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: AdminDashboard(),
-      home: ParkingMapPage(),
+      home: AdminDashboard(),
+      //home: ParkingMapPage(),
     );
   }
 }
